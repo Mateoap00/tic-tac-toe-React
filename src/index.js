@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+// Square as a function component
+// renders a button with a given value inside,
+// declares a onClick prop that calls another onClick prop of a parent component.
 function Square(props) {
     return (
         <button
@@ -13,6 +16,10 @@ function Square(props) {
     );
 }
 
+// Board component
+// renders the board with 9 squares in it
+// for that it uses the renderSquare function that returns a Square component
+// with a value and a onClick prop that calls a onClick function of a parent component.
 class Board extends React.Component {
 
     renderSquare(i, j, k) {
@@ -68,18 +75,33 @@ class Game extends React.Component {
     }
 
     // handler for a click in any of the buttons of the board
-    // takes the number of the button (0-9) and the position that in which the button shows (row, col)
+    // takes the number of the button (0-9) and the position in which the button shows (row, col)
     handleClick(i, j, k) {
+        // Takes a copy (slice) of the history with all the versions of the squares, if  a back-to-move was made
+        // it takes the history up until the selected move (the step).
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
+        // Takes a copy of the latest square in the history.
         const current = history[history.length - 1];
         const squares = current.squares.slice();
+        // Takes a copy of the locations in which the Xs and Os were clicked and drawn
+        // if a back-to-move was made, takes a copy of the locations up until that move
         const locations = this.state.stepsLocation.slice(0, this.state.stepNumber);
+        // Declares a new location that has the coordinates (j,k) of the square that was clicked
         const newLocation = `(${j}, ${k})`
+        // Checks if theres a winner or if that square was already clicked
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
+
+        // Checks if the letter to draw is a X or a O and 
+        // puts it in the correct number (0-9) of the square.
         squares[i] = this.state.xIsNext ? 'X' : 'O';
 
+        // Updates the state of the Game component with a new version of the squares board
+        // a new value for the current step (this is the latest move), 
+        // a new version of the locations of the squares that were already clicked
+        // and changes the state of xIsNext (if true, now is false, if false, now is true)
+        // renders again the game component.
         this.setState({
             history: history.concat([{
                 squares: squares,
@@ -90,6 +112,10 @@ class Game extends React.Component {
         });
     }
 
+    // Updates the value of the step (after a click to a 'Go to move #' button) 
+    // and checks if the new value of the step is odd or even to then
+    // define if the next turn is a X or a O,
+    // renders again the game component.
     jumpTo(step) {
         console.log(step);
         this.setState({
