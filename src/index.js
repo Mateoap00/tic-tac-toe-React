@@ -117,7 +117,6 @@ class Game extends React.Component {
     // define if the next turn is a X or a O,
     // renders again the game component.
     jumpTo(step) {
-        console.log(step);
         this.setState({
             stepNumber: step,
             xIsNext: (step % 2) === 0,
@@ -135,15 +134,24 @@ class Game extends React.Component {
         // Creates a button for every version of the squares board and 
         // shows the number of the move and the position that was clicked on (row, col)
         // the first button is used to restart the board
+        // also, checks what is the current move and bolds the button that
+        // corresponds it.
         const moves = history.map((step, move) => {
             const location = this.state.stepsLocation[move - 1];
             const desc = move ?
                 `Go to move #${move} with the location ${location}` :
                 'Go to game start';
+            let boldness = '';
+            if (move === this.state.stepNumber) {
+                boldness = <strong>{desc}</strong>;
+            } else {
+                boldness = desc;
+            }
             return (
                 <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
-                </li>
+                    <button onClick={() =>
+                        this.jumpTo(move)}>{boldness}</button>
+                </li >
             );
         });
 
