@@ -8,6 +8,7 @@ import './index.css';
 function Square(props) {
     return (
         <button
+            key={props.keyValue}
             className="square"
             onClick={props.onClick}
         >
@@ -24,6 +25,7 @@ class Board extends React.Component {
 
     renderSquare(i, j, k) {
         return <Square
+            keyValue={`square#${i}`}
             value={this.props.squares[i]}
             onClick={() => this.props.onClick(i, j, k)}
         />;
@@ -33,24 +35,29 @@ class Board extends React.Component {
         //With only one for loop, render all divs 'board-row'
     }
 
+    // Renders the board of squares with two loops, the lower loop is used to generate
+    // the squares components of each row and the upper loop is used to generate
+    // each row (a div) with the squares.
     render() {
+        let i = 0;
+        let key = '';
+        const rows = [];
+        for (let j = 0; j < 3; j++) {
+            const cols = [];
+            key = `row#${j}`;
+            for (let k = 0; k < 3; k++) {
+                cols.push(this.renderSquare(i, j, k));
+                i++;
+            }
+            rows.push(
+                <div key={key} className='board-row'>
+                    {cols}
+                </div>
+            );
+        }
         return (
             <div>
-                <div className="board-row">
-                    {this.renderSquare(0, 0, 0)}
-                    {this.renderSquare(1, 0, 1)}
-                    {this.renderSquare(2, 0, 2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3, 1, 0)}
-                    {this.renderSquare(4, 1, 1)}
-                    {this.renderSquare(5, 1, 2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6, 2, 0)}
-                    {this.renderSquare(7, 2, 1)}
-                    {this.renderSquare(8, 2, 2)}
-                </div>
+                {rows}
             </div>
         );
     }
@@ -77,6 +84,7 @@ class Game extends React.Component {
     // handler for a click in any of the buttons of the board
     // takes the number of the button (0-9) and the position in which the button shows (row, col)
     handleClick(i, j, k) {
+        console.log(i);
         // Takes a copy (slice) of the history with all the versions of the squares, if  a back-to-move was made
         // it takes the history up until the selected move (the step).
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
