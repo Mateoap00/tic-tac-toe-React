@@ -16,6 +16,15 @@ ul {
 
 .status {
     margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.status.winner {
+    color: #b5e48c;
+}
+
+.status.tie {
+    color: #e63946;
 }
 
 .square {

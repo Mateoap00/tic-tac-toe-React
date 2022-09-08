@@ -212,14 +212,20 @@ class Game extends React.Component {
             moves = moves.map(move => move).reverse();
         }
 
-        // Shows information about the next turn or if there's a winner 
+        // Shows information about the next turn or if there's a winner or a tie.
         let status;
+        let classStatus;
         let rowWinner = null;
         if (won) {
             status = 'Winner: ' + won[0];
             rowWinner = [won[1], won[2], won[3]];
+            classStatus = 'status winner';
+        } else if (this.state.stepNumber === 9) {
+            status = 'It\'s a tie!';
+            classStatus = 'status tie'
         } else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+            classStatus = 'status';
         }
 
         let enableToggle = false;
@@ -241,7 +247,7 @@ class Game extends React.Component {
                     />
                 </div>
                 <div className="game-info">
-                    <div>{status}</div>
+                    <div className={classStatus}>{status}</div>
                     <ToggleOrder
                         enableToggle={enableToggle}
                         handleToggleChange={() => this.handleToggleChange()}
