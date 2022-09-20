@@ -15,3 +15,10 @@
 
 ## What skills I learned developing this project?
 ##### I learned what is ReactJs and some basic concepts like passing data through props, state and lifting up state, elements, components, function components, and the importance of using a key when building dynamic lists-type components.
+
+## Screenshots
+![image](https://user-images.githubusercontent.com/77356897/191147039-c3c5f818-62f4-41f0-b7d0-ea0b19634c3b.png)
+![image](https://user-images.githubusercontent.com/77356897/191147002-9e6552ef-c9f9-49c7-bd08-45f92bef63d7.png)
+![image](https://user-images.githubusercontent.com/77356897/191146935-112a3292-1ed9-46ec-b4ad-022673139046.png)
+![image](https://user-images.githubusercontent.com/77356897/191146896-3dccb50d-f3c6-4c7d-92d4-e365b2e780ee.png)
+![image](https://user-images.githubusercontent.com/77356897/191147257-33424e0f-4374-4125-adbd-bc9d2b40d466.png)
