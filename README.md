@@ -14,7 +14,7 @@
 - When no one wins, display a message about the result being a draw.
 
 ## What skills I learned developing this project?
-##### I learned what is ReactJs and some basic concepts like passing data through props, state and lifting up state, elements, components, function components, and the importance of using a key when building dynamic lists-type components.
+  I learned what is ReactJs and some basic concepts like passing data through props, state and lifting up state, elements, components, function components, and the importance of using a key when building dynamic lists-type components.
 
 ## Screenshots
 ![image](https://user-images.githubusercontent.com/77356897/191147039-c3c5f818-62f4-41f0-b7d0-ea0b19634c3b.png)
